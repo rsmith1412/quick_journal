@@ -1,2 +1,2 @@
-# journal_app
+# quick_journal
 # quick_journal
