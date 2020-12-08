@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h2>QuickJourn</h2>
+        <a href="/entries">Entries</a>
+        <a href="/logout">Logout</a>
+    </header>
+    <main>
+        <div class="entry">
+            <h2>Welcome, {{user.alias}}!</h2>
+            <h3 style="text-align: center;">Today: {{date}}</h3>
+            <p>{{quote}}</p>
+            <p> - {{quoteAuthor}}</p>
+            <form action="/morning_entry" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p>Three things I'm grateful for...</p>
+                    <ol>
+                        <li><input type="text" class="form-control" name="grateful_first"></li>
+                        <li><input type="text" class="form-control" name="grateful_second"></li>
+                        <li><input type="text" class="form-control" name="grateful_third"></li>
+                    </ol>
+                </div>
+                <div class="form-group">
+                    <p>Three things that would make today AMAZING...</p>
+                    <ol>
+                        <li><input type="text" class="form-control" name="great_first"></li>
+                        <li><input type="text" class="form-control" name="great_second"></li>
+                        <li><input type="text" class="form-control" name="great_third"></li>
+                    </ol>
+                </div>
+                <div class="form-group">
+                    <p>Daily affirmations. I am ...</p>
+                    <input type="text" class="form-control" name="affirmation">
+                </div>
+                <input type="hidden" name="date" value="{{date}}">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-dark center" value="Submit">
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
