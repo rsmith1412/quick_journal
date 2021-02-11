@@ -1,36 +1,202 @@
 * {
     margin: 0;
     padding: 0;
-    color: #343a40;
 }
-a {
-    color: #343a40;
+html, body {
+    height: 100%;
 }
-.register {
+body {
+    background-color: #D6D6D6;
+    display: flex;
+    flex-direction: column;
+    /*flex: 1 0 auto;*/
+}
+.container {
+    display: flex;
+}
+header a {
+    color: #343a40;
+    font-size: 20px;
+}
+.register, .login, .left {
     padding: 40px;
     width: 400px;
     margin: 0 auto;
 }
 header {
-    margin: 20px;
+    padding: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    color: #343a40;
+    border-bottom: 1px solid darkgrey;
+}
+header, navbar {
+    background-color: white;
+}
+nav {
+    justify-content: flex-end!important;
+}
+nav a {
+    padding: 0 10px;
+}
+a:hover {
+    text-decoration: none;
+    background-color: #EBEBEB;
+    border-radius: 5px;
+    color: #343a40;
 }
 main {
-    margin: 20px;
+    margin: 0 0 40px 0;
+    background-color: #D6D6D6;
+    flex: 1 0 auto;
 }
-.entry {
-    width: 60%;
+.new_entry {
+    width: 50%;
     margin: 0 auto;
+    text-align: center;
 }
-.entry p {
+.new_entry, .entry, .profile, .congrats {
+    padding-top: 20px;
+}
+.entry p, .entry h2 {
     text-align: center;
     margin-bottom: 0;
+    padding: 5px;
 }
 ol, li {
     margin-top: 5px;
 }
 .center {
+    /*display: flex;*/
+    justify-content: center;
+    margin: 0 auto;
+    width: 20%;
+}
+.row {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.morning {
+    background-color: #FFE74C;
+    border: 2px solid #343a40;
+}
+.morning, .night {
+    width: 40%;
+    border-radius: 15px;
+}
+.morning li, .night li {
+    display: flex;
+    background-color: white;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 5px;
+}
+form li {
+    padding: 0!important;
+}
+.night {
+    background-color: #343a40;
+    border: 2px solid black;
+}
+.night h2, .night p {
+    color: white;
+}
+/*.night li {
+    background-color: white;
+    margin: 20px;
+    border-radius
+}*/
+.day {
+    border: 1px solid black;
+}
+.days {
+    margin: 40px auto;
+    background-color: white;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+    width: 60%;
+}
+table {
+    padding: 40px;
+    border-radius: 10px;
+    width: 60%;
+}
+/*a {
+    width: 100%;
+}*/
+.day:hover{
+    background-color: lightblue;
+}
+.profile {
+    width: 40%;
+    text-align: center;
+}
+.profile, .about {
+    align-items: center;
+    margin: 40px auto;
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+    background-color: white;
+    /*flex: 1;*/
+    /*padding-left: 20px;*/
+}
+.about {
+    width: 60%;
+    padding: 10px;
+}
+#bioHeader {
+    text-align: center;
+}
+.auth-image {
+    width: 200px;
+    height: auto;
+    margin-top: 10px;
+    margin-right: 15px;
+    float: left;
+    border-radius: 2px;
+    filter: sepia(40%);
+}
+.links {
     display: flex;
     justify-content: center;
+    width: 90%;
+    margin: 0 auto;
+}
+.links a {
+    padding: 0 5px;
+    color: #343a40;
+}
+footer {
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  clear: both;
+  color: #343a40;
+  text-align: center;
+  background: white;
+  border-top: 1px solid darkgrey;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+footer a {
+  text-decoration: none;
+  justify-content: center;
+  align-items: center;
+  color: #343a40;
+}
+footer .icon {
+  /*width: 50px;*/
+  padding: 5px;
+}
+.footerMain {
+  width: 90%;
 }

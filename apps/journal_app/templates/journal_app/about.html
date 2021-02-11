@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f00034e13.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h2 class="col-4">QuickJourn</h2>
+        <h2 style="text-align: center;" class="col-4">Welcome, {{user.alias}}!</h2>
+        <!--<h2>QuickJourn</h2>-->
+        <nav class="navbar navbar-light col-4">
+            <a href="/dashboard"> Dashboard</a> |
+            <a href="/days"> Days</a> |
+            <a href="/profile">Profile</a> |
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div class="about">
+            <h2 id="bioHeader">About Me</h2>
+            <img src="{% static 'images/profile.jpg' %}" class="auth-image" alt="Robert" />
+            <p>Hello! Thank you for taking the time to check out my journaling web app. This is a personal project I created, inspired by The 5 Minute 
+            journal. This project was built in part to practice my coding skills, as well as to provide me an alternative outlet for journaling. This project 
+            was built using the Django Framework - Python 3.7. I will be adding additional features to the site. If you have any recommendations or notice any bugs 
+            that slipped through the cracks, please feel free to send me an email and I will do my best to update as quickly as possible.</p>
+            <p>I have been coding pretty consistently for the last year and a half, and I am currently looking for employment opportunities as an Entry-Level
+            Web/Software Developer. If you like what you see I can be reached in the following places: <a href="https://"></a>
+            </p>
+            <div class="links">
+                <a href="https://github.com/rsmith1412" class="icon fab fa-github fa-2x" target="_blank"></a>
+                <a href="https://www.linkedin.com/in/robert-smith-full-stack-dev/" class="icon fab fa-linkedin fa-2x" target="_blank"></a>
+                <a href="mailto:rsmith1412@yahoo.com" class="icon far fa-envelope fa-2x" target="_blank"></a>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footerMain">
+            <h5>&copy; 2021 Robert Smith</h5>
+            <a href="https://github.com/rsmith1412" class="icon fab fa-github fa-2x" target="_blank"></a>
+            <a href="https://www.linkedin.com/in/robert-smith-full-stack-dev/" class="icon fab fa-linkedin fa-2x" target="_blank"></a>
+            <a href="mailto:rsmith1412@yahoo.com" class="icon far fa-envelope fa-2x" target="_blank"></a>
+        </div>
+    </footer>
+</body>
+</html>

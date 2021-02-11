@@ -8,11 +8,10 @@ urlpatterns = [
     url(r'^login$', views.login),
     url(r'^dashboard$', views.dashboard),
     url(r'^morning_entry$', views.create_morning),
-    # url(r'^books/add_book$', views.create_book),
-    # url(r'^books/(?P<id>\d+)$', views.show_book),
-    # url(r'^books/(?P<id>\d+)/create_review$', views.create_review),
-    # url(r'^users/(?P<id>\d+)$', views.show_user),
-    # url(r'^books/(?P<id>\d+)/delete_review$', views.delete_review),
-    # url(r'^books$', views.books),
+    url(r'^night_entry$', views.create_night),
+    url(r'^days$', views.days),
+    url(r'^days/(?P<id>\d+)/show$', views.show_day),
+    url(r'^profile$', views.view_profile),
+    url(r'^about$', views.about),
     url(r'^logout$', views.logout)
 ]

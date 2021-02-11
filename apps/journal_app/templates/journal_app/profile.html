@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f00034e13.js" crossorigin="anonymous"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h2 class="col-4">QuickJourn</h2>
+        <h2 style="text-align: center;" class="col-4">Welcome, {{user.alias}}!</h2>
+        <!--<h2>QuickJourn</h2>-->
+        <nav class="navbar navbar-light col-4">
+            <a href="/dashboard"> Dashboard</a> |
+            <a href="/days"> Days</a> |
+            <a href="/about">About</a> |
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <div class="profile">
+            <h2>Name: {{user.name}}</h2>
+            <p>Alias: {{user.alias}}</p>
+            <p>Number of Days: {{user.days.count}}</p>
+            <p>Number of Mornings: {{morning_c}}</p>
+            <p>Number of Nights: {{night_c}}</p>
+            <p>Account Created: {{user.created_at}}</p>
+        </div>
+    </main>
+    <footer>
+        <div class="footerMain">
+            <h5>&copy; 2021 Robert Smith</h5>
+            <a href="https://github.com/rsmith1412" class="icon fab fa-github fa-2x" target="_blank"></a>
+            <a href="https://www.linkedin.com/in/robert-smith-full-stack-dev/" class="icon fab fa-linkedin fa-2x" target="_blank"></a>
+            <a href="mailto:rsmith1412@yahoo.com" class="icon far fa-envelope fa-2x" target="_blank"></a>
+        </div>
+    </footer>
+</body>
+</html>

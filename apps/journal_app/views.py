@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User, Day, Morning, Night, Thought
+import datetime
 from datetime import date
 import bcrypt
 
@@ -51,24 +52,53 @@ def dashboard(request):
         return redirect("/")
     user = User.objects.get(id=request.session["user_id"])
     today = date.today().strftime("%m/%d/%Y")
-    day = Day.objects.filter(date = date.today())
+    print(date.today())
+    day = Day.objects.filter(date = date.today()).first()
+    # print(day.morning)
+    # print(day.night)
     quote = "That's what."
     quoteAuth = "She"
-    if len(day) == 0:
-        isDayExist = False
-    else:
+    if day:
         isDayExist = True
+    else:
+        isDayExist = False
     context = {
         "user": user,
         "date": today,
         'isDay': isDayExist,
+        "day": day,
         "quote": quote,
         "quoteAuthor": quoteAuth
     }
     return render(request, "journal_app/dashboard.html", context)
 
+def get_today_date():
+    return date.today()
+
+# If a morning entry already exists for that day, it will display with an update button, and a form for the night entry
+# When a user creates a night entry, it will see if a day entry already exists. Will add foreign key to day model
+def create_day(user):
+    user = user
+    date = get_today_date()
+    # page = 1
+    # print("page: " + str(page))
+    quote = "That's what."
+    quoteAuthor = "She"
+    dayObject = Day.objects.create(date = date, quote = quote, quote_author = quoteAuthor, user = user)
+    return dayObject
+
 # When a user creates a morning entry, it will create a day entry
 def create_morning(request):
+    # Checking to see if day already exists
+    user = User.objects.get(id=request.session["user_id"])
+    date = get_today_date()
+    day = Day.objects.filter(date = date)
+    # Check to see if day exists before creating day
+    if len(day) > 0:
+        messages.error(request, "Entry has already been created.", extra_tags="day")
+        return redirect("/dashboard")
+    # Create day, beore we create morning
+    day = create_day(user)
     grateful_1 = request.POST["grateful_first"]
     grateful_2 = request.POST["grateful_second"]
     grateful_3 = request.POST["grateful_third"]
@@ -76,8 +106,9 @@ def create_morning(request):
     great_2 = request.POST["great_second"]
     great_3 = request.POST["great_third"]
     affirmation = request.POST["affirmation"]
-    date = request.POST[""]
+    #Create morning, attach to newly created day object
     morning = Morning.objects.create(
+        day = day,
         grateful_first = grateful_1,
         grateful_second = grateful_2,
         grateful_third = grateful_3,
@@ -86,12 +117,82 @@ def create_morning(request):
         great_third = great_3,
         affirmation = affirmation
     )
-    day = Day.objects.create(date=date)
-    return redirect("/dashboard")
-# If a morning entry already exists for that day, it will display with an update button, and a form for the night entry
-# When a user creates a night entry, it will see if a day entry already exists. Will add foreign key to day model
-# def create_day(page, date):
-#     date = 
+    return redirect("/days/" + str(day.id) + "/show")
+
+# Create night post, create relationship with day object
+def create_night(request):
+    day_id = request.POST["day_id"]
+    day = Day.objects.get(id = day_id)
+    amazing_1 = request.POST["amazing_first"]
+    amazing_2 = request.POST["amazing_second"]
+    amazing_3 = request.POST["amazing_third"]
+    made_better = request.POST["made_better"]
+    Night.objects.create(
+        day = day,
+        amazing_first = amazing_1,
+        amazing_second = amazing_2,
+        amazing_third = amazing_3,
+        made_better = made_better
+    )
+    return redirect("/days/" + str(day.id) + "/show")
+
+def days(request):
+    if not 'user_id' in request.session:
+        return redirect("/")
+    user = User.objects.get(id=request.session["user_id"])
+    days = user.days.all().order_by("-date")
+    context = {
+        "days" : days,
+        "user" : user
+    }
+    return render(request, "journal_app/days.html", context)
+
+def show_day(request, id):
+    if not 'user_id' in request.session:
+        return redirect("/")
+    user = User.objects.get(id=request.session["user_id"])
+    show_day = Day.objects.get(id = id)
+    context = {
+        "day" : show_day,
+        "user" : user
+    }
+    return render(request, "journal_app/show_day.html", context)
+
+def view_profile(request):
+    if not 'user_id' in request.session:
+        return redirect("/")
+    user = User.objects.get(id=request.session["user_id"])
+    days = user.days.all()
+    print(days)
+    morning_count = 0
+    night_count = 0
+    for day in days:
+        print(day)
+        if day.morning:
+            morning_count += 1
+        try:
+            if day.night:
+                night_count += 1
+        except Night.DoesNotExist:
+            print("Night entry does not exist")
+        # finally:
+        #     if day.night:
+        #         night_count += 1
+        # if day.night:
+        #     night_count += 1
+    context = {
+        "user" : user,
+        "morning_c" : morning_count,
+        "night_c" : night_count
+    }
+    return render(request, "journal_app/profile.html", context)
+
+def about(request):
+    if not 'user_id' in request.session:
+        return redirect("/")
+    user = User.objects.get(id=request.session["user_id"])
+    context = {'user' : user}
+    return render(request, "journal_app/about.html", context)
 
 def logout(request):
     request.session.clear()

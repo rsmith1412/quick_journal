@@ -35,10 +35,12 @@ class UserManager(models.Manager):
             errors["password"] = "Password fields must match."
 
         return errors
-
-class MorningManager(models.Manager):
-    def morning_validator(self, postData):
+class DayManager(models.Manager):
+    def day_validator(self, postData):
         errors = {}
+        days = Day.objects.filter(date=postData["date"])
+        if days:
+            errors["date"] = "Entry has already been created for this day."
 
 class User(models.Model):
     name = models.CharField(max_length=45)
@@ -52,7 +54,7 @@ class User(models.Model):
 
 class Day(models.Model):
     date = models.DateField(auto_now_add=True)
-    page = models.PositiveIntegerField()
+    # page = models.PositiveIntegerField()
     quote = models.CharField(max_length=60)
     quote_author = models.CharField(max_length=60)
     user = models.ForeignKey(
@@ -62,6 +64,7 @@ class Day(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = DayManager()
 
 class Morning(models.Model):
     day = models.OneToOneField(

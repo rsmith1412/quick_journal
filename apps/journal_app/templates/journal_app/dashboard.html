@@ -6,21 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/5.14.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f00034e13.js" crossorigin="anonymous"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     <header>
-        <h2>QuickJourn</h2>
-        <a href="/entries">Entries</a>
-        <a href="/logout">Logout</a>
+        <h2 class="col-4">QuickJourn</h2>
+        <h2 style="text-align: center;" class="col-4">Welcome, {{user.alias}}!</h2>
+        <!--<h2>QuickJourn</h2>-->
+        <nav class="navbar navbar-light col-4">
+            <a href="/days"> Days</a> |
+            <a href="/profile">Profile</a> |
+            <a href="/about">About</a> |
+            <a href="/logout">Logout</a>
+        </nav>
     </header>
     <main>
-        <div class="entry">
-            <h2>Welcome, {{user.alias}}!</h2>
+        <div class="new_entry">
             <h3 style="text-align: center;">Today: {{date}}</h3>
-            <p>{{quote}}</p>
-            <p> - {{quoteAuthor}}</p>
+            <p class="center" style="font-style: italic;">{{quote}}</p>
+            <p class="center"> - {{quoteAuthor}}</p>
+            {% if not day.morning %}
             <form action="/morning_entry" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -44,11 +52,46 @@
                     <input type="text" class="form-control" name="affirmation">
                 </div>
                 <input type="hidden" name="date" value="{{date}}">
-                <div class="form-group">
+                <div class="form-group" style="display: flex;">
                     <input type="submit" class="btn btn-dark center" value="Submit">
                 </div>
             </form>
+            {% elif day.morning and not day.night %}
+            <form action="/night_entry" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p>Three AMAZING things that happened today....</p>
+                    <ol>
+                        <li><input type="text" class="form-control" name="amazing_first"></li>
+                        <li><input type="text" class="form-control" name="amazing_second"></li>
+                        <li><input type="text" class="form-control" name="amazing_third"></li>
+                    </ol>
+                </div>
+                <div class="form-group">
+                    <p>How could I have made today even better?.</p>
+                    <input type="text" class="form-control" name="made_better"></li>
+                </div>
+                <input type="hidden" name="day_id" value="{{day.id}}">
+                <div class="form-group" style="display: flex;">
+                    <input type="submit" class="btn btn-dark center" value="Submit">
+                </div>
+            </form>
+            {% elif day.morning and day.night %}
+            <div class="congrats">
+                <h2>Congrats on filling out another day!</h2>
+                <h2>Keep it up!</h2>
+            </div>
+            {% endif %}
+
         </div>
     </main>
+    <footer>
+        <div class="footerMain">
+            <h5>&copy; 2021 Robert Smith</h5>
+            <a href="https://github.com/rsmith1412" class="icon fab fa-github fa-2x" target="_blank"></a>
+            <a href="https://www.linkedin.com/in/robert-smith-full-stack-dev/" class="icon fab fa-linkedin fa-2x" target="_blank"></a>
+            <a href="mailto:rsmith1412@yahoo.com" class="icon far fa-envelope fa-2x" target="_blank"></a>
+        </div>
+    </footer>
 </body>
 </html>
