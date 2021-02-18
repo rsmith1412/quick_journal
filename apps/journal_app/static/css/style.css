@@ -13,6 +13,8 @@ body {
 }
 .container {
     display: flex;
+    flex: 0.8;
+    align-items: center;
 }
 header a {
     color: #343a40;
@@ -67,10 +69,9 @@ ol, li {
     margin-top: 5px;
 }
 .center {
-    /*display: flex;*/
+    display: flex;
     justify-content: center;
     margin: 0 auto;
-    width: 20%;
 }
 .row {
     width: 80%;
@@ -80,7 +81,7 @@ ol, li {
 }
 .morning {
     background-color: #FFE74C;
-    border: 2px solid #343a40;
+    border: 2px solid white;
 }
 .morning, .night {
     width: 40%;
@@ -98,7 +99,7 @@ form li {
 }
 .night {
     background-color: #343a40;
-    border: 2px solid black;
+    border: 2px solid white;
 }
 .night h2, .night p {
     color: white;

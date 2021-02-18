@@ -18,7 +18,7 @@
         </div>
         <!--Login form w/ link to register link -->
         <div class="login">
-            <h2>Login</h2>
+            <h2 class="center">Login</h2>
             <form action="/login" method="POST">
                 {% csrf_token %}
                 <div class="form-group">
@@ -31,15 +31,17 @@
                     <input type="submit" class="btn btn-success center" value="Login">
                 </div>
             </form>
-            {% if messages %}
-                {% for message in messages %}
-                    {% if message.extra_tags == "login" %}
-                    <p style="color: red">{{message}}</p>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-            <p>OR</p>
-            <a href="/register">Register</a>
+            <div class="center">
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == "login" %}
+                        <p style="color: darkred">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <p class="center">or</p>
+            <a class="center" href="/register">Register New Account</a>
             <!-- Figure out later -->
             <!--<a href="/forgot_password">Forgot Password?</a>-->
         </div>

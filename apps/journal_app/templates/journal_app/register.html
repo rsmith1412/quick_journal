@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="register">
-        <h2>Welcome!</h2>
+        <h2 class="center">Welcome!</h2>
         <form action="/register_user" method="POST">
             {% csrf_token %}
             <div class="form-group">
@@ -33,19 +33,21 @@
             <div class="form-group">
                 Confirm Password: <input type="password" class="form-control" name="confirm_password">
             </div>
-            <div class="form-group">
+            <div class="form-group center">
                 <input type="submit" class="btn btn-primary center" value="Register">
             </div>
         </form>
-        {% if messages %}
-            {% for message in messages %}
-                {% if message.extra_tags == "reg" %}
-                <p style="color: red">{{message}}</p>
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-        <p>OR</p>
-        <a href="/">Login</a>
+        <div class="center">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.extra_tags == "reg" %}
+                    <p style="color: red">{{message}}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <p class="center">OR</p>
+        <a class="center" href="/">Login</a>
     </div>
 </body>
 </html>
