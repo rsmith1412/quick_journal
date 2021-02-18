@@ -25,6 +25,12 @@ header a {
     width: 400px;
     margin: 0 auto;
 }
+.or {
+    display: flex;
+}
+.or hr {
+    display: inline-block;
+}
 header {
     padding: 20px;
     display: flex;
